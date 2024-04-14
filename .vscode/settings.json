@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "text.h": "c",
+        "printf.h": "c",
+        "drive_bridge.h": "c"
+    }
+}
