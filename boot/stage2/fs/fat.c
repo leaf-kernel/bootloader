@@ -31,6 +31,47 @@ uint16_t fat_get_fat_size()
     return fat_size_sectors;
 }
 
+uint16_t fat_get_root_dir_sectors()
+{
+    uint16_t bytes_per_sector = boot_sector.bytes_per_sector;
+    uint16_t root_dir_entries = boot_sector.root_dir_entries;
+
+    uint32_t root_dir_size_bytes = (uint32_t)root_dir_entries * 32;
+    uint16_t root_dir_size_sectors = (root_dir_size_bytes + bytes_per_sector - 1) / bytes_per_sector;
+
+    return root_dir_size_sectors;
+}
+
+uint16_t fat_get_first_data_sector()
+{
+    return boot_sector.reserved_sectors + (boot_sector.numbers_of_fats * fat_get_fat_size()) + fat_get_root_dir_sectors();
+}
+
+uint16_t fat_get_first_fat_sector()
+{
+    return boot_sector.reserved_sectors;
+}
+
+uint16_t fat_get_data_sectors()
+{
+    return fat_get_total_sectors() - (boot_sector.reserved_sectors + (boot_sector.numbers_of_fats * fat_get_fat_size()) + fat_get_root_dir_sectors());
+}
+
+uint16_t fat_get_total_clusters()
+{
+    return fat_get_data_sectors() / boot_sector.sectors_per_cluster;
+}
+
+uint16_t fat_get_first_root_dir_sector()
+{
+    return fat_get_first_data_sector() - fat_get_root_dir_sectors();
+}
+
+uint16_t fat_get_first_sector_of_cluster(uint16_t cluster)
+{
+    return ((cluster - 2) * boot_sector.sectors_per_cluster) + fat_get_first_data_sector();
+}
+
 void print_bs()
 {
     dprintf("Bytes per Sector: %d\n", boot_sector.bytes_per_sector);
@@ -62,6 +103,5 @@ bool init_fat(DISK *disk)
     }
 
     print_bs();
-
     return true;
 }
