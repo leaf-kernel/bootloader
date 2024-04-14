@@ -30,7 +30,5 @@ void start(uint8_t boot_drive)
         hcf();
     }
 
-    printf("UEFI Was to scary :(\n");
-
     hcf();
 }

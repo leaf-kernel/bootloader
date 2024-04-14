@@ -13,6 +13,7 @@ $(BUILD_DIR)/Leaf-Legacy.img: boot
 	@mkfs.fat -F 12 -n "LEAF" $@
 	@dd if=$(BUILD_DIR)/stage1.bin of=$@ conv=notrunc
 	@mcopy -i $@ $(BUILD_DIR)/stage2.bin "::stage2.bin"
+	@mcopy -i $@ test.txt "::test.txt"
 
 boot: stage1 stage2
 
