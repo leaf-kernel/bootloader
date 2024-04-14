@@ -1,5 +1,8 @@
 # bootloader
-The x86 bootloader for leaf 32bit.
+A 32-bit bootloader for Leaf Legacy (32bit).
 
-## Exclaimer
-**This is very far away and we havent started on impelementing any 32bit support!**
+# Compiling
+To compile an FAT12 (floppy) image with bootloader on it run 
+```bash
+make
+```
