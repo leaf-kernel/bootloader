@@ -34,7 +34,7 @@ typedef struct
     uint8_t system_id[8];
     uint8_t boot_code[448];
     uint16_t boot_signature;
-} __attribute((packed)) FAT_BootRecord;
+} __attribute((packed)) FAT_BootSector;
 
 typedef struct
 {
