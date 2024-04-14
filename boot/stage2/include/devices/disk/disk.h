@@ -12,7 +12,7 @@ typedef struct
     uint16_t heads;
 } DISK;
 
-bool disk_init(DISK *disk, uint8_t driveNumber);
+bool init_disk(DISK *disk, uint8_t driveNumber);
 bool disk_read_sectors(DISK *disk, uint32_t lba, uint8_t sectors, void *lowerDataOut);
 
 #endif // __DISK_H__

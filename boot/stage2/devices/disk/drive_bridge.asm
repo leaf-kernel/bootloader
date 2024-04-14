@@ -110,9 +110,8 @@ disk_reset:
 global disk_read
 disk_read:
     push ebp
-    mov ebp, es
+    mov ebp, esp
     enter_real
-    [bits 16]
     push ebx
     push es
     mov dl, [bp + 8]
@@ -134,7 +133,6 @@ disk_read:
     pop ebx
     push eax
     enter_protected
-    [bits 32]
     pop eax
     mov esp, ebp
     pop ebp

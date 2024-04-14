@@ -1,7 +1,8 @@
 #include <devices/disk/disk.h>
 #include <devices/disk/drive_bridge.h>
+#include <libc/stdio/printf.h>
 
-bool disk_init(DISK *disk, uint8_t driveNumber)
+bool init_disk(DISK *disk, uint8_t driveNumber)
 {
     uint8_t driveType;
     uint16_t cylinders, sectors, heads;

@@ -1,6 +1,8 @@
 #include <devices/disk/disk.h>
 #include <libc/stdio/printf.h>
 
+#include <fs/fat.h>
+
 static void hcf(void)
 {
     asm("cli");
@@ -16,13 +18,19 @@ void start(uint8_t boot_drive)
     disable_cursor();
 
     DISK disk;
-    if (!disk_init(&disk, boot_drive))
+    if (!init_disk(&disk, boot_drive))
     {
         printf("Failed to initialize disk\n");
         hcf();
     }
 
-    printf("Initialized disk (0x%02X)!\n", boot_drive);
+    if (!init_fat(&disk))
+    {
+        printf("Failed to initialize FAT\n");
+        hcf();
+    }
+
+    printf("UEFI Was to scary :(\n");
 
     hcf();
 }
