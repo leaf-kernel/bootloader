@@ -102,6 +102,5 @@ bool init_fat(DISK *disk)
         return false;
     }
 
-    print_bs();
     return true;
 }
