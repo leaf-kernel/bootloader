@@ -38,19 +38,24 @@ typedef struct
 
 typedef struct
 {
-    char filename[8];
+    uint8_t filename[8];  // Store filname and extension seperatly
+    uint8_t extension[3]; //
     uint8_t attributes;
-    uint8_t reserved1;
-    uint8_t creation_time_cs;
+    uint16_t reserved;
     uint16_t creation_time;
     uint16_t creation_date;
     uint16_t last_access_date;
-    uint16_t high_cluster;
-    uint16_t modification_time;
-    uint16_t modification_date;
-    uint16_t low_cluster;
+    uint16_t ignored;
+    uint16_t last_write_time;
+    uint16_t last_wrte_date;
+    uint16_t first_logical_cluster;
     uint32_t file_size;
-} __attribute((packed)) FAT_Entry;
+} __attribute((packed)) FAT_DirectoryEntry;
+
+typedef struct
+{
+    FAT_BootSector *boot_sector;
+} __attribute((packed)) FAT_Data;
 
 bool init_fat(DISK *disk);
 
